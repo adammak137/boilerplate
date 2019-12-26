@@ -5,6 +5,7 @@ import store from './reducers/store'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Home from './components/home'
 import Pants from './components/pants-component'
+import Login from './components/login'
 import '../public/index.css'
 
 ReactDOM.render(
@@ -14,7 +15,10 @@ ReactDOM.render(
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to='/'></Link>
+            </li>
+            <li>
+              <Link to="/home">Home</Link>
             </li>
             <li>
               <Link to="/pants">Pants</Link>
@@ -25,7 +29,7 @@ ReactDOM.render(
       </div>
       <Switch>
         <Route path="/pants" component={Pants} />
-        <Route path="/" />
+        <Route path="/" component={Login} />
       </Switch>
     </Router>
   </Provider>,

@@ -2,6 +2,7 @@ let router = require('express').Router()
 
 router.use('/clothes', require('./clothes'))
 router.use('/pants', require('./pants'))
+router.use('/auth', require('./auth'))
 
 
 router.use(function (req, res, next) {
