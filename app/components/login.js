@@ -1,23 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getLogin } from '../action-creators/user'
+import { Redirect } from 'react-router-dom'
 
 class login extends React.Component {
 
   render() {
-    return (
-      <form onSubmit={(event) => this.props.getLogin(event)}>
-        <label>
-          Email:
+    if (this.props.user.userInfo.id > 0 && this.props.user.userInfo.id !== Infinity) {
+      return (<Redirect to={'/home'} />)
+    } else
+      return (
+        <form onSubmit={(event) => this.props.getLogin(event)}>
+          <label>
+            Email:
         <input type='text' name='email' />
-        </label>
-        <label>
-          Password:
+          </label>
+          <label>
+            Password:
           <input type='password' name='password' />
-          <button type='submit'>Submit</button>
-        </label>
-      </form>
-    )
+            <button type='submit'>Submit</button>
+          </label>
+        </form>
+      )
   }
 }
 

@@ -25,7 +25,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('*', (req, res, next) => {
-  console.log(req.user)
   next()
 })
 
@@ -47,9 +46,9 @@ app.use(function (err, req, res, next) {
 });
 
 const port = process.env.PORT || 1338; // this can be very useful if you deploy to Heroku!
-db.sync({ force: true })
+db.sync()
   .then(function () {
-    User.create({ email: 'cody@email.com', password: 12345 })
+    // User.create({ email: 'cody@email.com', password: 12345 })
     app.listen(port, function () {
       console.log("Knock, knock");
       console.log("Who's there?");

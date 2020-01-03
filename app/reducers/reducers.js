@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { ADD_JEANS } from '../action-creators/jeans'
-import { LOGIN } from '../action-creators/user'
+import { LOGIN, FETCHING, REGISTER } from '../action-creators/user'
 
 const pantsReducer = (state = ['jeans'], action) => {
   switch (action.type) {
@@ -16,12 +16,20 @@ const clothesReducer = (state = { tshirt: 'Bohemian' }, action) => {
   }
 }
 
-const userReducer = (state = {}, action) => {
+const userReducer = (state = { userInfo: { id: Infinity } }, action) => {
   switch (action.type) {
+    case REGISTER:
+      return {
+        userInfo: action.user,
+        created: action.created
+      }
     case LOGIN:
       return {
-        ...state,
-        user: action.user
+        userInfo: action.user
+      }
+    case FETCHING:
+      return {
+        userInfo: action.user
       }
     default: return state
   }

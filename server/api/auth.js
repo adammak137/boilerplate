@@ -14,12 +14,21 @@ router.put('/', async (req, res, next) => {
     })
     if (userInfo) {
       let data = { id: userInfo.id, email: userInfo.email }
-      req.login(data, (err) => err ? next(err) : res.json(data))
+      req.login(data, (err) => err ? next(err) : res.json(data).status(201))
     } else {
       const err = new Error('Incorrect email or password!')
       err.status = 401
       throw err
     }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/', (req, res, next) => {
+  try {
+    if (req.user) return res.status(201).json(req.user)
+    return res.status(201).send({ id: 0 })
   } catch (error) {
     next(error)
   }
